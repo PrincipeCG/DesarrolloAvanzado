@@ -1,33 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import MainButton from './Components/MainButton';
+import Form from './Components/Form';
+import TitlesContainer from './Components/TitlesContainer';
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const messages = [];
+
+  const handleMyFirstButton = (e) => {
+    console.log(e.target);
+  }
+
+  const [name, setName] = useState("");
+  const [input, setInput] = useState("");
+
+  for(let i = 1; i <= 25; i++){
+    messages.push(`Este es el titulo #${i}`);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Hola desde React</h1>
+      <MainButton handlingFunction = {handleMyFirstButton} text={"Este es mi primer boton en React"}/>
+      <Form input={input} setInput={setInput} setName={setName}/>
+      <h1>{name}</h1>
+      <TitlesContainer>
+        {messages.map((message, key) => {
+          return(
+            <h1 key={key}>{message}</h1>
+          )
+        })}
+      </TitlesContainer>
     </>
   )
 }
